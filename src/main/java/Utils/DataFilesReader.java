@@ -19,6 +19,7 @@ public class DataFilesReader {
     public String getStreets() {
         String streetsData = STREETS;
         String line = "";
+
         String randomStreet = "";
         List<String> lines = new ArrayList<String>();
 
