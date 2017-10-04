@@ -28,7 +28,6 @@ public class BasePage {
     public static final int STATIC_TIMEOUT =  1;
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
-    Reporter reporter = new Reporter();
 
     public BasePage() {
         //reporter.instantiate();
