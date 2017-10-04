@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite">
-    <test name="Login">
+    <test name="SearchWeather">
         <classes>
-            <class name="Login"/>
+            <class name="SearchWeather"/>
         </classes>
     </test>
 </suite>
