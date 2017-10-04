@@ -29,7 +29,6 @@ public class LoginTest {
 
         HomePage home = HomePage.Instance;
         home.open();
-        home.clickLogin();
     }
 
     @AfterTest
@@ -38,5 +37,4 @@ public class LoginTest {
         BasePage.driver().quit();
         DriverManager.closeDriver();
     }
-
 }

@@ -203,7 +203,7 @@ public class BasePage {
 
     public static String takeScreenshot(WebDriver driver, String name){
         File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String filename = name + "screenshot.png";
+        String filename = name + "Screenshot.png";
         try {
             FileUtils.copyFile(file, new File(TARGET_FOLDER + File.separator + filename));
         } catch (IOException e) {

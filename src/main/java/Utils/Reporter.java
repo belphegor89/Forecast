@@ -101,11 +101,7 @@ public class Reporter {
     }
 
     public static void pass(String log) {
-        try {
-            test.pass(log, MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot()).build());
-        } catch (IOException e) {
-            test.pass(log);
-        }
+        test.pass(log);
     }
 
     public static void fail(String log) {
@@ -138,7 +134,7 @@ public class Reporter {
             pass("Test passed");
     }
 
-    private static String takeScreenshot() {
+    public static String takeScreenshot() {
         try {
             screenshotFolder = Paths.get(reportPath.toString(), "screenshots");
 
