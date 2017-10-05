@@ -1,4 +1,4 @@
-import Pages.HomePage;
+import Pages.ForecastPage;
 import Utils.BaseTest;
 import org.testng.annotations.Test;
 
@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 public class SearchWeather extends BaseTest {
 
     @Test
-    public void login() throws Exception {
-        HomePage home = HomePage.Instance;
-        home.open();
-        home.searchCity();
-        home.takeScreenshotForecast();
+    public void getForecast() throws Exception {
+        ForecastPage forecast = ForecastPage.Instance;
+        forecast.open();
+        forecast.searchCity();
+        forecast.takeScreenshotForecast();
     }
 }

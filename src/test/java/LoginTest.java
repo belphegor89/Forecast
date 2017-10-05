@@ -1,5 +1,5 @@
 import Pages.BasePage;
-import Pages.HomePage;
+import Pages.ForecastPage;
 import Utils.DriverManager;
 import Utils.PropertiesReader;
 import Utils.Reporter;
@@ -27,7 +27,7 @@ public class LoginTest {
     @Test
     public void login() throws Exception {
 
-        HomePage home = HomePage.Instance;
+        ForecastPage home = ForecastPage.Instance;
         home.open();
     }
 

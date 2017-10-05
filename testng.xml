@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite">
-    <test name="SearchWeather">
+    <test name="GetWeatherForecast" preserve-order="true">
         <classes>
             <class name="SearchWeather"/>
+            <class name="LoginToMailbox"/>
         </classes>
     </test>
 </suite>

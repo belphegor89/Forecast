@@ -1,18 +1,17 @@
 package Pages;
 
-import Utils.DataFilesReader;
 import Utils.Reporter;
 import org.openqa.selenium.By;
 
 /**
  * Created by yzosin on 04-Sep-17.
  */
-public class HomePage extends BasePage {
+public class ForecastPage extends BasePage {
 
-    private static HomePage instance;
-    public static HomePage Instance =(instance!=null) ? instance: new HomePage();
+    private static ForecastPage instance;
+    public static ForecastPage Instance =(instance!=null) ? instance: new ForecastPage();
 
-    public HomePage(){
+    public ForecastPage(){
 
     }
     By searchField = By.id("search_city");
