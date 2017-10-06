@@ -3,7 +3,7 @@
     <test name="GetWeatherForecast" preserve-order="true">
         <classes>
             <class name="SearchWeather"/>
-            <class name="LoginToMailbox"/>
+            <class name="SendReportInMail"/>
         </classes>
     </test>
 </suite>

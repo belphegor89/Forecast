@@ -15,8 +15,8 @@ public class LoginPage extends BasePage {
     public LoginPage(){
 
     }
-    By username = By.xpath(".//*[@id='user-login-form']/input[2]");
-    By password = By.xpath(".//*[@id='user-login-form']/input[3]");
+    By username = By.xpath(".//input[@name='Login']");
+    By password = By.xpath(".//input[@type='password']");
     By loginbtn = By.xpath(".//button[@type='submit']");
 
     public void open(){

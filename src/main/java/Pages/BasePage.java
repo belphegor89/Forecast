@@ -26,6 +26,7 @@ public class BasePage {
     public static final int DEFAULT_SHORT_TIMEOUT = 10;
     public static final int DEFAULT_LONG_TIMEOUT = 50;
     public static final int STATIC_TIMEOUT =  1;
+    private static String fileUploadPath = TARGET_FOLDER + "/SinoptikScreenshot.png";
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
 
@@ -212,4 +213,8 @@ public class BasePage {
         return filename;
     }
 
+    public void fileUpload(By element) {
+        WebElement webelement = driver().findElement(element);
+        webelement.sendKeys(fileUploadPath);
+    }
 }
