@@ -26,7 +26,8 @@ public class BasePage {
     public static final int DEFAULT_SHORT_TIMEOUT = 10;
     public static final int DEFAULT_LONG_TIMEOUT = 50;
     public static final int STATIC_TIMEOUT =  1;
-    private static String fileUploadPath = TARGET_FOLDER + "/SinoptikScreenshot.png";
+    public static String rootFolder = System.getProperty("user.dir");
+    private static String fileUploadPath = rootFolder + File.separator + TARGET_FOLDER + File.separator + "SinoptikScreenshot.png";
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
 
