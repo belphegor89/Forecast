@@ -22,7 +22,8 @@ public class ForecastPage extends BasePage {
     }
 
     public void takeScreenshotForecast() {
-        Reporter.log("Taking screenshot for page");
+        Reporter.log("Taking screenshot for page!!!");
+        logger.info("");
         takeScreenshot(driver(),"Sinoptik");
     }
 }
