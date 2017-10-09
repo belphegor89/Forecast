@@ -12,8 +12,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static Pages.BasePage.driver;
+
 
 public class Tools {
+
     static void waitForElementVisible(WebDriver driver, By by, int timeout) {
 
         WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -35,18 +38,15 @@ public class Tools {
     }
 
     /**
-     * Waits for a page to load completely
+     * Action to accept alert / error message on the web page
      *
-     * @param timeoutSeconds: the integer value that specifies the timeout
+     * @return String webelement text with information provided in the Popup Window
      */
-    public void waitForPageLoad(int timeoutSeconds, WebDriver driver) {
-        Wait<WebDriver> wait = new WebDriverWait(driver, timeoutSeconds, 500).ignoring(WebDriverException.class);
-        wait.until(new Function<WebDriver, Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                return String.valueOf(((JavascriptExecutor) driver).executeScript("return document.readyState"))
-                        .equals("complete");
-            }
-        });
+    public String acceptAlertMessage() {
+        Alert jsalert = driver().switchTo().alert();
+        String alertMsg = jsalert.getText();
+        jsalert.accept();
+        return alertMsg;
     }
 
     public void autoSelectFromDropdown(WebDriver driver, By by) {
@@ -68,7 +68,7 @@ public class Tools {
     }
 
     public static String getCurrentTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH:mm");
         LocalDateTime dateTime = LocalDateTime.now();
         String formattedDateTime = dateTime.format(formatter);
 

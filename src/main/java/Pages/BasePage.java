@@ -26,6 +26,8 @@ public class BasePage {
     public static final int DEFAULT_SHORT_TIMEOUT = 10;
     public static final int DEFAULT_LONG_TIMEOUT = 50;
     public static final int STATIC_TIMEOUT =  1;
+    public static String rootFolder = System.getProperty("user.dir");
+    private static String fileUploadPath = rootFolder + File.separator + TARGET_FOLDER + File.separator + "SinoptikScreenshot.png";
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
 
@@ -155,6 +157,10 @@ public class BasePage {
 
     }
 
+    /**
+     * Waits for a page to load completely
+     *
+     */
     public static void waitForPageToLoad(){
         Wait<WebDriver> wait = new WebDriverWait(driver(), STATIC_TIMEOUT).ignoring(WebDriverException.class);
         wait.until(new Function<WebDriver, Boolean>() {
@@ -212,4 +218,8 @@ public class BasePage {
         return filename;
     }
 
+    public void fileUpload(By element) {
+        WebElement webelement = driver().findElement(element);
+        webelement.sendKeys(fileUploadPath);
+    }
 }

@@ -12,15 +12,13 @@ public class LoginPage extends BasePage {
     private static LoginPage instance;
     public static LoginPage Instance =(instance!=null) ? instance: new LoginPage();
 
-    public LoginPage(){
-
-    }
-    By username = By.xpath(".//*[@id='user-login-form']/input[2]");
-    By password = By.xpath(".//*[@id='user-login-form']/input[3]");
+    By username = By.xpath(".//input[@name='Login']");
+    By password = By.xpath(".//input[@type='password']");
     By loginbtn = By.xpath(".//button[@type='submit']");
+    By writeMail = By.xpath(".//*[@id='sidebar']/div[1]/a");
 
     public void open(){
-        Reporter.log("Navigating to mailbox login page");
+        Reporter.log("Navigating to: " + PropertiesReader.getConfigProperty("URL2"));
         driver().get(PropertiesReader.getConfigProperty("URL2"));
     }
 
@@ -31,5 +29,11 @@ public class LoginPage extends BasePage {
         findElement(password).sendKeys(PropertiesReader.getConfigProperty("password"));
         Reporter.log("Clicking login");
         findElement(loginbtn).click();
+        validateLogin();
+        Reporter.log("User is successfully logged in!");
+    }
+
+    public void validateLogin(){
+        isElementPresentAndDisplay(writeMail);
     }
 }

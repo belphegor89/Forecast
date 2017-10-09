@@ -11,9 +11,6 @@ public class ForecastPage extends BasePage {
     private static ForecastPage instance;
     public static ForecastPage Instance =(instance!=null) ? instance: new ForecastPage();
 
-    public ForecastPage(){
-
-    }
     By searchField = By.id("search_city");
     By searchButton = By.xpath(".//*[@id='form-search']//input[2]");
 
@@ -25,7 +22,7 @@ public class ForecastPage extends BasePage {
     }
 
     public void takeScreenshotForecast() {
-        Reporter.log("Entering Ternopil into search field");
+        Reporter.log("Taking screenshot for page");
         takeScreenshot(driver(),"Sinoptik");
     }
 }
