@@ -14,6 +14,10 @@ public class DataFilesReader {
     static String FIRST_NAMES = "src/main/resources/First_Name.dat";
     static String LAST_NAMES = "src/main/resources/Last_Name.dat";
 
+    /**
+     * Get random street from a .dat file
+     *
+     */
     public static String getStreets() {
 
         String line;
@@ -36,6 +40,10 @@ public class DataFilesReader {
         return "";
     }
 
+    /**
+     * Get random first name from a .dat file
+     *
+     */
     public static String getFirstName() {
 
         String line;
@@ -56,6 +64,10 @@ public class DataFilesReader {
         return "";
     }
 
+    /**
+     * Get random last name from a .dat file
+     *
+     */
     public static String getLastName() {
 
         String line;

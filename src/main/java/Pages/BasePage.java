@@ -157,6 +157,10 @@ public class BasePage {
 
     }
 
+    /**
+     * Waits for a page to load completely
+     *
+     */
     public static void waitForPageToLoad(){
         Wait<WebDriver> wait = new WebDriverWait(driver(), STATIC_TIMEOUT).ignoring(WebDriverException.class);
         wait.until(new Function<WebDriver, Boolean>() {
