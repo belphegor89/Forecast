@@ -12,6 +12,7 @@ public class SendReportInMail extends BaseTest {
     public void loginToEmail(){
         LoginPage loginPage = LoginPage.Instance;
         SendMail sendMail = SendMail.Instance;
+        logger.info("Starting test for sending forecast via email");
         loginPage.open();
         loginPage.login();
         sendMail.sendMailWithFile();

@@ -13,5 +13,6 @@ public class SearchWeather extends BaseTest {
         forecast.open();
         forecast.searchCity();
         forecast.takeScreenshotForecast();
+        logger.info("Screenshot with forecast taken");
     }
 }

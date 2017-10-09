@@ -13,10 +13,8 @@ public class SendMail extends BasePage {
 
     private static SendMail instance;
     public static SendMail Instance =(instance!=null) ? instance: new SendMail();
+    String writeTo = PropertiesReader.getConfigProperty("recipient");
 
-    public SendMail(){
-
-    }
     By writeMail = By.xpath(".//*[@id='sidebar']/div[1]/a");
     By recipient = By.id("toField");
     By subject = By.xpath("//span[@class='field']/input[@name='subject']");
@@ -27,8 +25,8 @@ public class SendMail extends BasePage {
     public void sendMailWithFile () {
         Reporter.log("Clicking Write Mail link");
         findElement(writeMail).click();
-        Reporter.log("Entering recipient");
-        findElement(recipient).sendKeys(PropertiesReader.getConfigProperty("recipient"));
+        Reporter.log("Entering recipient: " + writeTo);
+        findElement(recipient).sendKeys(writeTo);
         Reporter.log("Entering subject");
         findElement(subject).sendKeys("Weather report");
         Reporter.log("Adding weather report to mail");
@@ -37,7 +35,6 @@ public class SendMail extends BasePage {
         findElement(text).sendKeys("Today's forecast");
         Reporter.log("Sending mail");
         findElement(sendButton).click();
-        waitForAlert(driver(), 1);
-        Reporter.log("Mail sent");
+        Reporter.log("Mail sent!");
     }
 }
