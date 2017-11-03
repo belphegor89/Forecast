@@ -49,7 +49,7 @@ public class Tools {
         return alertMsg;
     }
 
-    public void autoSelectFromDropdown(WebDriver driver, By by) {
+    public String autoSelectFromDropdown(WebDriver driver, By by) {
         WebElement selectElement = driver.findElement(by);
         Select select = new Select(selectElement);
 
@@ -64,7 +64,7 @@ public class Tools {
         }
 
         select.selectByIndex(value);
-        allOptions.get(value).getText();
+        return allOptions.get(value).getText();
     }
 
     public static String getCurrentTime() {

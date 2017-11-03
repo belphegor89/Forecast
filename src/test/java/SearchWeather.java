@@ -25,5 +25,6 @@ public class SearchWeather extends BaseTest {
         loginPage.open();
         loginPage.login();
         sendMail.sendMailWithFile();
+        logger.info("Test finished, please see the report");
     }
 }

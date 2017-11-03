@@ -49,12 +49,12 @@ public class Reporter {
     public void instantiate(){
         try {
             // generate report folder name
-            Path rootpath = getNewReportPath();
+            Path rootPath = getNewReportPath();
             // create directory if not exists
-            if(Files.notExists(rootpath)){
-                reportPath = Files.createDirectories(rootpath);
+            if(Files.notExists(rootPath)){
+                reportPath = Files.createDirectories(rootPath);
             } else{
-                rootpath = reportPath;
+                reportPath = rootPath;
             }
         }catch(IOException e) {
             e.printStackTrace();
