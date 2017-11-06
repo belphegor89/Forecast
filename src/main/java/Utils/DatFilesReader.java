@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by yzosin on 03-Oct-17.
  */
-public class DataFilesReader {
+public class DatFilesReader {
     static String STREETS = "src/main/resources/Streets.dat";
     static String FIRST_NAMES = "src/main/resources/First_Name.dat";
     static String LAST_NAMES = "src/main/resources/Last_Name.dat";
@@ -29,6 +29,7 @@ public class DataFilesReader {
                 //List<String> lines = Files.readAllLines(Paths.get("src/main/resources/Streets.dat"), Charset.defaultCharset());
                 Random random = new Random();
                 String randomStreet = lines.get(random.nextInt(lines.size()- 1));
+                breader.close();
                 return randomStreet;
             }
         }
@@ -54,6 +55,7 @@ public class DataFilesReader {
                 lines = breader.lines().collect(Collectors.toList());
                 Random random = new Random();
                 String randomFirstName = lines.get(random.nextInt(lines.size()- 1));
+                breader.close();
                 return randomFirstName;
             }
         } catch (IOException e) {
@@ -78,6 +80,7 @@ public class DataFilesReader {
                 lines = breader.lines().collect(Collectors.toList());
                 Random random = new Random();
                 String randomLastName = lines.get(random.nextInt(lines.size()- 1));
+                breader.close();
                 return randomLastName;
             }
         } catch (IOException e) {
