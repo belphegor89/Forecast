@@ -22,7 +22,6 @@ public class SearchWeather extends BaseTest {
         forecast.takeScreenshotForecast();
         logger.info("Screenshot with forecast taken");
         logger.info("Starting test for sending forecast via email");
-        loginPage.open();
         loginPage.login();
         sendMail.sendMailWithFile();
         logger.info("Test finished, please see the report");

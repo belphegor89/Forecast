@@ -1,5 +1,6 @@
 package Pages;
 
+import Utils.PropertiesReader;
 import Utils.Reporter;
 import org.openqa.selenium.By;
 
@@ -15,8 +16,8 @@ public class ForecastPage extends BasePage {
     By searchButton = By.xpath(".//*[@id='form-search']//input[2]");
 
     public void searchCity() {
-        Reporter.log("Entering Ternopil into search field");
-        findElement(searchField).sendKeys("Тернопіль");
+        Reporter.log("Entering" + PropertiesReader.getConfigProperty("searchCity") + "into search field");
+        findElement(searchField).sendKeys(PropertiesReader.getConfigProperty("searchCity"));
         Reporter.log("Clicking search icon");
         findElement(searchButton).click();
     }
