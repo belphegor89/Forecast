@@ -44,6 +44,6 @@ public class SendMail extends BasePage {
     public void validateMessageSent(){
         String validationMessage = findElement(message).getText();
         Assert.assertEquals(validationMessage,"Вашого листа відправлено",
-                "Success mesasge doesn't match the expected one");
+                "Success message doesn't match the expected one");
     }
 }
