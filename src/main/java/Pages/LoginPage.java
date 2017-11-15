@@ -15,7 +15,7 @@ public class LoginPage extends BasePage {
     By username = By.xpath(".//input[@name='Login']");
     By password = By.xpath(".//input[@type='password']");
     By loginbtn = By.xpath(".//button[@type='submit']");
-    By writeMail = By.xpath(".//*[@id='sidebar']/div[1]/a");
+    By writeMail = By.xpath(".//*[@id='content']//button");
 
     public void open(){
         Reporter.log("Navigating to: " + PropertiesReader.getConfigProperty("URL2"));

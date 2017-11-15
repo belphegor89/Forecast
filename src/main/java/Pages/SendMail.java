@@ -16,7 +16,7 @@ public class SendMail extends BasePage {
 
     String writeTo = PropertiesReader.getConfigProperty("recipient");
 
-    By writeMail = By.xpath(".//*[@id='sidebar']/div[1]/a");
+    By writeMail = By.xpath(".//*[@id='content']//button");
     By recipient = By.id("toField");
     By subject = By.xpath("//span[@class='field']/input[@name='subject']");
     By file = By.xpath("//div[@class='upl-control']//input[@name='file']");
