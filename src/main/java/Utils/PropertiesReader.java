@@ -1,6 +1,5 @@
 package Utils;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -9,7 +8,7 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
-    static String PROPERTIES = "src/main/resources/configuration.properties";
+    static String PROPERTIES = "src/main/resources/project.properties";
 
     public static String getConfigProperty(String fieldName){
         String fileLocation = PROPERTIES;
@@ -50,7 +49,7 @@ public class PropertiesReader {
 //        properties = new Properties();
 //        InputStream inputStream;
 //        try {
-//            inputStream = new FileInputStream("src/main/resources/configuration.properties");
+//            inputStream = new FileInputStream("src/main/resources/project.properties");
 //            properties.load(inputStream);
 //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();

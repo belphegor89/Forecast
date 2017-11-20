@@ -1,8 +1,6 @@
 package Pages;
 
-import Utils.PropertiesReader;
 import Utils.Reporter;
-import Utils.Tools;
 import com.google.common.base.Function;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -11,6 +9,7 @@ import org.openqa.selenium.support.ui.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 public class BasePage {
 
     public static Logger logger = Logger.getLogger(BasePage.class);
-    public final static String URL = (PropertiesReader.getConfigProperty("URL"));
     public String pageURL = "";
     public String pageTitle = "";
     static String TARGET_FOLDER = "target";
@@ -63,9 +61,9 @@ public class BasePage {
         driver().navigate().refresh();
     }
 
-    public void open() {
-        Reporter.log("Opening the page: " + "\"" + URL);
-        driver().get(URL);
+    public void open(String url) {
+        Reporter.log("Opening the page: " + "\"" + url);
+        driver().get(url);
     }
 
     public String getTitle() {
@@ -73,9 +71,9 @@ public class BasePage {
         return pageTitle;
     }
 
-    public String getURL() {
-        Reporter.log("The requested URL is: " + URL + pageURL);
-        return URL + pageURL;
+    public String getURL(String url) {
+        Reporter.log("The requested URL is: " + url + pageURL);
+        return url + pageURL;
     }
 
     public void setText(By element, String value){
@@ -135,7 +133,9 @@ public class BasePage {
             return driver().findElement(element);
         } catch (Exception e) {
             e.printStackTrace();
+            e.getMessage();
             throw new RuntimeException("Failure finding element");
+
         }
     }
 
@@ -174,6 +174,42 @@ public class BasePage {
     static void waitForElement(By by){
         WebDriverWait wait = new WebDriverWait(driver(), DEFAULT_SHORT_TIMEOUT);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    static void waitForElementVisible(WebDriver driver, By by, int timeout) {
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    /**
+     * Action to accept alert / error message on the web page
+     *
+     * @return String webelement text with information provided in the Popup Window
+     */
+    public String acceptAlertMessage() {
+        Alert jsalert = driver().switchTo().alert();
+        String alertMsg = jsalert.getText();
+        jsalert.accept();
+        return alertMsg;
+    }
+
+    public String autoSelectFromDropdown(WebDriver driver, By by) {
+        WebElement selectElement = driver.findElement(by);
+        Select select = new Select(selectElement);
+
+        int value;
+        Random random = new Random();
+        List<WebElement> allOptions = select.getOptions();
+
+        if (allOptions.get(0).getText().toLowerCase().contains("none")) {
+            value = 1 + random.nextInt(allOptions.size() - 1);
+        } else {
+            value = random.nextInt(allOptions.size() - 1);
+        }
+
+        select.selectByIndex(value);
+        return allOptions.get(value).getText();
     }
 
     public static void sleepFor(int timeout){

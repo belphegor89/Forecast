@@ -17,12 +17,8 @@ public class LoginPage extends BasePage {
     By loginbtn = By.xpath(".//button[@type='submit']");
     By writeMail = By.xpath(".//*[@id='content']//button");
 
-    public void open(){
-        Reporter.log("Navigating to: " + PropertiesReader.getConfigProperty("URL2"));
-        driver().get(PropertiesReader.getConfigProperty("URL2"));
-    }
-
     public void login() {
+        open(PropertiesReader.getConfigProperty("URL2"));
         Reporter.log("Entering username");
         findElement(username).sendKeys(PropertiesReader.getConfigProperty("username"));
         Reporter.log("Entering password");
@@ -31,6 +27,7 @@ public class LoginPage extends BasePage {
         findElement(loginbtn).click();
         validateLogin();
         Reporter.log("User is successfully logged in!");
+        waitForPageToLoad();
     }
 
     public void validateLogin(){

@@ -27,6 +27,16 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                        <properties>
+                            <property>
+                                <name>parallel</name>
+                                <value>methods</value>
+                            </property>
+                            <property>
+                                <name>threadCount</name>
+                                <value>2</value>
+                            </property>
+                        </properties>
                 </configuration>
             </plugin>
     </plugins>
@@ -68,12 +78,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
             <scope>test</scope>
         </dependency>
 

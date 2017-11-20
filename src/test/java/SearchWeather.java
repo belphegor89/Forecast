@@ -1,8 +1,8 @@
 import Pages.ForecastPage;
-import Pages.LoginPage;
-import Pages.SendMail;
-import Utils.BaseTest;
+import Utils.*;
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
 /**
@@ -14,17 +14,11 @@ public class SearchWeather extends BaseTest {
 
     @Test
     public void execute() throws Exception {
+
         ForecastPage forecast = ForecastPage.Instance;
-        LoginPage loginPage = LoginPage.Instance;
-        SendMail sendMail = SendMail.Instance;
-        forecast.open();
+        logger.info("Starting test for searching weather forecast");
         forecast.searchCity();
         forecast.takeScreenshotForecast();
-        logger.info("Screenshot with forecast taken");
-        logger.info("Starting test for sending forecast via email");
-        loginPage.open();
-        loginPage.login();
-        sendMail.sendMailWithFile();
-        logger.info("Test finished, please see the report");
+        Reporter.log("Screenshot with forecast taken");
     }
 }
