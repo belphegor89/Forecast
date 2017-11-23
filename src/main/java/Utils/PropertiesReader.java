@@ -43,19 +43,4 @@ public class PropertiesReader {
         }
         return (model.getVersion());
     }
-
-//    public Properties getProperties() {
-//
-//        properties = new Properties();
-//        InputStream inputStream;
-//        try {
-//            inputStream = new FileInputStream("src/main/resources/project.properties");
-//            properties.load(inputStream);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return properties;
-//    }
 }
