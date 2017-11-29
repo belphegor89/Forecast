@@ -5,10 +5,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 import org.testng.log4testng.Logger;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +18,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.AShot;
 
 
 /**
@@ -31,18 +28,21 @@ public class Reporter {
     private static Logger logger = Logger.getLogger(Reporter.class);
     private static String root = System.getProperty("user.dir");
     private static String filePath = "extentreport.html";
+    private static String testCaseName;
+    private static final Reporter REPORTER = new Reporter();
     private static ExtentReports extent;
-    private static WebDriver driver;
     private static ExtentTest test;
     private static ExtentTest childTest;
     private static ExtentHtmlReporter htmlReporter;
-    private static String testCaseName;
-    private static Path screenshotFolder;
     private static Path reportPath;
+    private static Path screenshotFolder;
     private static boolean buildStatus = true;
-    private static ArrayList failuresList = new ArrayList<String>();
+    private static ArrayList failuresBucket = new ArrayList<String>();
 
-    public synchronized void instantiate(){
+    private Reporter() {
+
+        logger.info("Creating the Reporter");
+
         try {
             // generate report folder name
             Path rootPath = getNewReportPath();
@@ -55,18 +55,26 @@ public class Reporter {
         }catch(IOException e) {
             e.printStackTrace();
         }
+        if (null == extent)
+        extent = new ExtentReports();
 
-        if (null == extent) {
-            extent = new ExtentReports();
+        htmlReporter = new ExtentHtmlReporter(Paths.get(reportPath.toString(), filePath).toAbsolutePath().toFile());
+        htmlReporter.config().setChartVisibilityOnOpen(false);
+        htmlReporter.config().setDocumentTitle("Yura");
+        htmlReporter.config().setReportName("Testing parallel execution with TestNG");
+        htmlReporter.config().setTheme(Theme.DARK);
 
-            htmlReporter = new ExtentHtmlReporter(Paths.get(reportPath.toString(), filePath).toAbsolutePath().toFile());
-            htmlReporter.config().setChartVisibilityOnOpen(false);
-            htmlReporter.config().setDocumentTitle("Yura");
-            htmlReporter.config().setReportName("Get and Send Weather Forecast");
-            htmlReporter.config().setTheme(Theme.DARK);
+        extent.attachReporter(htmlReporter);
 
-            extent.attachReporter(htmlReporter);
-        }
+        logger.info("The ReportManger has been successfully created.");
+    }
+
+    public static synchronized ExtentTest addTest(String testName) {
+        return extent.createTest(testName);
+    }
+
+    public static void saveAndQuit(){
+        extent.flush();
     }
 
     private static Path getNewReportPath() {
@@ -77,75 +85,37 @@ public class Reporter {
         return Paths.get(root, "report", reportName);
     }
 
-    /**
-     * <p>
-     * Add test to the report with the give test name
-     * </p>
-     *
-     * @param testName    name of the test executing
-     * @param description populate information about the test executing
-     */
-    public static synchronized void addTest(String testName, String description) {
-        driver = DriverManager.getDriver();
-
-        testCaseName = testName;
-        test = extent.createTest(testName, description);
-    }
-
-    public static void log(String log) {
-        test.info(log);
-    }
-
-    public static void pass(String log) {
-        test.pass(log);
-    }
-
-    public static synchronized void fail(String log) {
+    public static void fail(String log,
+                            String testCaseName) {
         try {
-            String screenshotPath = takeScreenshot().substring(takeScreenshot().indexOf("screenshots"));
+            String screenshotPath = takeScreenshot(testCaseName).substring(takeScreenshot(testCaseName).indexOf("screenshots"));
             childTest.fail(log, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             buildStatus = false;
-            failuresList.add(log);
+            failuresBucket.add(log);
         } catch (Exception e) {
             test.fail(log);
         }
     }
 
-    public static void skip(String log) {
-		childTest.skip(log);
-    }
+    public static String takeScreenshot(String testCaseName) {
 
-    public static void flush() {
-        extent.flush();
-    }
-
-    public void stopReport(ITestResult result){
-        if (result.getStatus() == ITestResult.FAILURE)
-            fail("Test failed because of: " + result.getThrowable());
-        else if (result.getStatus()== ITestResult.SKIP)
-            skip("Test skipped" );
-        else
-            pass("Test passed");
-    }
-
-    public static String takeScreenshot() {
         try {
             screenshotFolder = Paths.get(reportPath.toString(), "screenshots");
 
             if (Files.notExists(screenshotFolder))
                 Files.createDirectory(screenshotFolder);
 
-            String fileName = testCaseName.replace(" ", "_");
+            String fileName = testCaseName.replace(" ", "_") + "_" + System.nanoTime();
             Path screenshotPath = Paths.get(screenshotFolder.toString(), fileName + ".png");
-
             Screenshot screenshot = null;
-            screenshot = new AShot().takeScreenshot(driver);
+
             ImageIO.write(screenshot.getImage(), "PNG", new File(screenshotPath.toString()));
 
             return screenshotPath.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return null;
     }
 }

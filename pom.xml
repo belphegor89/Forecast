@@ -26,6 +26,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>violity.xml</suiteXmlFile>
                     </suiteXmlFiles>
                         <properties>
                             <property>

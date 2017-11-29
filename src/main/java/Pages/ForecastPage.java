@@ -20,14 +20,14 @@ public class ForecastPage extends BasePage {
 
     public void searchCity() {
         open(PropertiesReader.getConfigProperty("URL"));
-        Reporter.log("Entering" + PropertiesReader.getConfigProperty("searchCity") + " into search field");
+        logger.info("Entering " + PropertiesReader.getConfigProperty("searchCity") + " into search field");
         findElement(searchField).sendKeys(PropertiesReader.getConfigProperty("searchCity"));
-        Reporter.log("Clicking search icon");
+        logger.info("Clicking search icon");
         findElement(searchButton).click();
     }
 
     public void takeScreenshotForecast() {
-        Reporter.log("Taking screenshot for page");
+        logger.info("Taking screenshot for page");
         takeScreenshot(driver(),"Sinoptik");
     }
 }

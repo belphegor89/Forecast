@@ -5,16 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * Created by yzosin on 01-Sep-17.
@@ -50,7 +46,7 @@ public class DriverManager {
 
         options.addArguments("--test-type");
         options.addArguments("--start-maximized");
-        options.addArguments("--disable-save-password-bubble");
+        options.addArguments("--disable-saveAndQuit-password-bubble");
         DesiredCapabilities capabilities = new DesiredCapabilities().chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

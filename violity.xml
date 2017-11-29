@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Violity" parallel = "tests" thread-count="2">
+    <test name="LoginToViolity">
+        <classes>
+            <class name="ViolityLogin"/>
+        </classes>
+    </test>
+    <test name="LoginToViolity2">
+        <classes>
+            <class name="ViolityLogin"/>
+        </classes>
+    </test>
+</suite>

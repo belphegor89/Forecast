@@ -1,27 +1,28 @@
-import Pages.ForecastPage;
+import Pages.LoginPage;
+import Pages.SendMail;
 import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.TestException;
 import org.testng.annotations.Test;
 
 /**
  * Created by yzosin on 20-Sep-17.
  */
-public class SearchWeather extends BaseTest {
+public class SendForecast extends BaseTest {
 
-    ExtentTest test = Reporter.addTest("SearchWeather");
+    ExtentTest test = Reporter.addTest("SendForecast");
 
     @Test
     public void execute() {
 
         try {
-            ForecastPage forecast = ForecastPage.Instance;
-            test.info("Starting test for searching weather forecast");
-            forecast.searchCity();
-            forecast.takeScreenshotForecast();
-            test.pass("Screenshot with forecast taken");
+            LoginPage loginPage = LoginPage.Instance;
+            SendMail sendMail = SendMail.Instance;
+            test.info("Starting test for sending forecast via email");
+            loginPage.login();
+            sendMail.sendMailWithFile();
+            test.pass("Test finished, please see the report");
         } catch(Exception e){
             e.printStackTrace();
             Reporter.takeScreenshot(getClass().getName().toString());

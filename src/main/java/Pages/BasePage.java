@@ -30,7 +30,7 @@ public class BasePage {
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
 
     public BasePage() {
-        //reporter.instantiate();
+
     }
 
     public static WebDriver driver(){
@@ -62,17 +62,17 @@ public class BasePage {
     }
 
     public void open(String url) {
-        Reporter.log("Opening the page: " + "\"" + url);
+        logger.info("Opening the page: " + "\"" + url);
         driver().get(url);
     }
 
     public String getTitle() {
-        Reporter.log("The page title is: " + "\"" + pageTitle + "\"");
+        logger.info("The page title is: " + "\"" + pageTitle + "\"");
         return pageTitle;
     }
 
     public String getURL(String url) {
-        Reporter.log("The requested URL is: " + url + pageURL);
+        logger.info("The requested URL is: " + url + pageURL);
         return url + pageURL;
     }
 

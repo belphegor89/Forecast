@@ -28,28 +28,28 @@ public class SendMail extends BasePage {
 
     public void sendMailWithFile () {
 
-        Reporter.log("Clicking Write Mail link");
+        logger.info("Clicking Write Mail link");
         findElement(writeMail).click();
-        Reporter.log("Entering recipient: " + writeTo);
+        logger.info("Entering recipient: " + writeTo);
         isElementPresentAndDisplay(subject);
         findElement(recipient).sendKeys(writeTo);
-        Reporter.log("Entering subject");
+        logger.info("Entering subject");
         findElement(subject).sendKeys("Weather report for " + Tools.getCurrentTime());
-        Reporter.log("Adding weather report to mail");
+        logger.info("Adding weather report to mail");
         fileUpload(file);
         switchToFrame(frame);
-        Reporter.log("Adding mail body");
+        logger.info("Adding mail body");
         findElement(text).sendKeys("Today's forecast");
         switchToDefaultContent();
-        Reporter.log("Sending mail");
+        logger.info("Sending mail");
         findElement(sendButton).click();
         try{
             acceptAlertMessage();
         } catch(NoAlertPresentException Ex){
-            Reporter.log("No alert message found");
+            logger.info("No alert message found");
             validateMessageSent();
         }
-        Reporter.log("Mail sent!");
+        logger.info("Mail sent!");
     }
 
     public void validateMessageSent(){

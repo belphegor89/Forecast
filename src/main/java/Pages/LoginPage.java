@@ -19,14 +19,14 @@ public class LoginPage extends BasePage {
 
     public void login() {
         open(PropertiesReader.getConfigProperty("URL2"));
-        Reporter.log("Entering username");
+        logger.info("Entering username");
         findElement(username).sendKeys(PropertiesReader.getConfigProperty("username"));
-        Reporter.log("Entering password");
+        logger.info("Entering password");
         findElement(password).sendKeys(PropertiesReader.getConfigProperty("password"));
-        Reporter.log("Clicking login");
+        logger.info("Clicking login");
         findElement(loginbtn).click();
         validateLogin();
-        Reporter.log("User is successfully logged in!");
+        logger.info("User is successfully logged in!");
         waitForPageToLoad();
     }
 
