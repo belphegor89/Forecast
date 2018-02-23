@@ -1,7 +1,6 @@
 package Pages.violity;
 
 import Pages.BasePage;
-import Pages.LoginPage;
 import Utils.PropertiesReader;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;

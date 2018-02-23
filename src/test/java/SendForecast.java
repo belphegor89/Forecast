@@ -1,8 +1,7 @@
-import Pages.LoginPage;
-import Pages.SendMail;
+import Pages.Email.LoginPage;
+import Pages.Email.SendMail;
 import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
-import org.apache.log4j.Logger;
 import org.testng.TestException;
 import org.testng.annotations.Test;
 

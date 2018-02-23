@@ -9,13 +9,14 @@ import org.openqa.selenium.support.ui.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yzosin on 23-Aug-17.
  */
-public class BasePage {
+public abstract class BasePage {
 
     public static Logger logger = Logger.getLogger(BasePage.class);
     public String pageURL = "";
@@ -98,7 +99,8 @@ public class BasePage {
     public boolean isElementPresentAndDisplay(By by) {
         try {
             return findElement(by).isDisplayed();
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
+            e.getLocalizedMessage();
             return false;
         }
     }

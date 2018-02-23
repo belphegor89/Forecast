@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="GeneralSuite" parallel = "methods" thread-count="2">
+<suite name="GeneralSuite" parallel = "methods" thread-count="1">
     <test name="GetWeatherForecast" preserve-order="true">
     <classes>
-        <class name="SearchWeather"/>
-        <class name="ViolityLogin"/>
+        <class name="SearchWeatherForecast"/>
+        <class name="SendForecast"/>
     </classes>
     </test>
 </suite>

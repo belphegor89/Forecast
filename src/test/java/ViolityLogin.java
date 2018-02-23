@@ -13,7 +13,7 @@ public class ViolityLogin extends BaseTest {
 
     ExtentTest test = Reporter.addTest("ViolityLogin");
 
-    @Test(threadPoolSize = 2)
+    @Test
     public void execute() {
         try {
             ViolityLoginPage violityLoginPage = ViolityLoginPage.Instance;

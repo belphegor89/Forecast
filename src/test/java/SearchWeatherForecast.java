@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 /**
  * Created by yzosin on 20-Sep-17.
  */
-public class SearchWeather extends BaseTest {
+public class SearchWeatherForecast extends BaseTest {
 
     ExtentTest test = Reporter.addTest("SearchWeather");
 

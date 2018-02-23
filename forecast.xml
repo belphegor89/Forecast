@@ -2,7 +2,7 @@
 <suite name="Forecast" parallel = "none" thread-count="1">
     <test name="GetWeatherForecast" preserve-order="true">
         <classes>
-            <class name="SearchWeather"/>
+            <class name="SearchWeatherForecast"/>
             <class name="SendForecast"/>
         </classes>
     </test>
