@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="Forecast" parallel = "none" thread-count="1">
-    <test name="GetWeatherForecast" preserve-order="true">
-        <classes>
-            <class name="SearchWeatherForecast"/>
-            <class name="SendForecast"/>
-        </classes>
-    </test>
-</suite>
