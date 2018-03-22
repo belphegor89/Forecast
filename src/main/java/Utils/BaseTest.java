@@ -17,7 +17,6 @@ public class BaseTest {
     public void before(){
 
         try{
-            logger.info("Creating driver");
             BasePage.driver.set(DriverManager.getDriver());
         } catch(Exception e){
             e.printStackTrace();
