@@ -5,11 +5,14 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 /**
  * Created by yzosin on 20-Sep-17.
  */
+@Listeners(TestListener.class)
 public class BaseTest {
+
 
     public static Logger logger = Logger.getLogger(BaseTest.class);
 
@@ -17,6 +20,7 @@ public class BaseTest {
     public void before(){
 
         try{
+            LoggerManager.getLogger().info("Creating driver for " + getClass().getName().toString() + " test");
             BasePage.driver.set(DriverManager.getDriver());
         } catch(Exception e){
             e.printStackTrace();

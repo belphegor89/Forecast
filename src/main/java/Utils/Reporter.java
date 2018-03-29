@@ -8,7 +8,6 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.log4testng.Logger;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -97,7 +96,7 @@ public class Reporter {
         }
     }
 
-    public static String takeScreenshot(String testCaseName) {
+    public static synchronized String takeScreenshot(String testCaseName) {
 
         try {
             screenshotFolder = Paths.get(reportPath.toString(), "screenshots");
@@ -105,10 +104,11 @@ public class Reporter {
             if (Files.notExists(screenshotFolder))
                 Files.createDirectory(screenshotFolder);
 
-            String fileName = testCaseName.replace(" ", "_") + "_" + System.nanoTime();
+            String fileName = testCaseName.replace(" ", "_");
             Path screenshotPath = Paths.get(screenshotFolder.toString(), fileName + ".png");
             Screenshot screenshot = null;
-
+            screenshot = new AShot()
+                    .takeScreenshot(DriverManager.getDriver());
             ImageIO.write(screenshot.getImage(), "PNG", new File(screenshotPath.toString()));
 
             return screenshotPath.toString();

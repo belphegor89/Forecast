@@ -5,6 +5,8 @@ import Utils.PropertiesReader;
 import Utils.Tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 /**
@@ -32,7 +34,12 @@ public class SendMail extends BasePage {
         findElement(writeMail).click();
         logger.info("Entering recipient: " + writeTo);
         isElementPresentAndDisplay(subject);
-        findElement(recipient).sendKeys(writeTo);
+        Actions actions = new Actions(BasePage.driver());
+        WebElement element = BasePage.driver().findElement(recipient);
+        actions.moveToElement(element);
+        actions.click();
+        actions.sendKeys(writeTo);
+        actions.build().perform();
         logger.info("Entering subject");
         findElement(subject).sendKeys("Weather report for " + Tools.getCurrentTime());
         logger.info("Adding weather report to mail");
