@@ -10,9 +10,8 @@ import org.testng.annotations.Listeners;
 /**
  * Created by yzosin on 20-Sep-17.
  */
-@Listeners(TestListener.class)
-public class BaseTest {
 
+public class BaseTest {
 
     public static Logger logger = Logger.getLogger(BaseTest.class);
 
