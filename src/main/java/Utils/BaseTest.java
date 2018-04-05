@@ -10,7 +10,6 @@ import org.testng.annotations.Listeners;
 /**
  * Created by yzosin on 20-Sep-17.
  */
-
 public class BaseTest {
 
     public static Logger logger = Logger.getLogger(BaseTest.class);
@@ -19,7 +18,7 @@ public class BaseTest {
     public void before(){
 
         try{
-            LoggerManager.getLogger().info("Creating driver for " + getClass().getName().toString() + " test");
+            logger.info("Creating driver for " + getClass().getName().toString() + " test");
             BasePage.driver.set(DriverManager.getDriver());
         } catch(Exception e){
             e.printStackTrace();

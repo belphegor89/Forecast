@@ -1,11 +1,7 @@
 package Pages;
 
-import Utils.DatFilesReader;
 import Utils.PropertiesReader;
-import Utils.Reporter;
 import org.openqa.selenium.By;
-
-import java.io.IOException;
 
 /**
  * Created by yzosin on 04-Sep-17.

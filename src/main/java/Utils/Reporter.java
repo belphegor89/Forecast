@@ -5,6 +5,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.PatternLayout;
 import org.testng.log4testng.Logger;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -16,7 +18,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -37,6 +41,8 @@ public class Reporter {
     private static Path screenshotFolder;
     private static boolean buildStatus = true;
     private static ArrayList failuresBucket = new ArrayList<String>();
+    private static Path logFolder;
+    private static ConcurrentHashMap<Long, ExtentTest> testStorage = new ConcurrentHashMap<>();
 
     private Reporter() {
 
@@ -69,7 +75,10 @@ public class Reporter {
     }
 
     public static synchronized ExtentTest addTest(String testName) {
-        return extent.createTest(testName);
+        ExtentTest testCase = extent.createTest(testName);
+        testStorage.put(Thread.currentThread().getId(), testCase);
+        return testCase;
+        //return extent.createTest(testName);
     }
 
     public static void saveAndQuit(){
@@ -83,6 +92,7 @@ public class Reporter {
 
         return Paths.get(root, "report", reportName);
     }
+
 
     public static void fail(String log,
                             String testCaseName) {

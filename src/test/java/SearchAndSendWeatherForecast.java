@@ -1,10 +1,9 @@
+import Utils.Reporter;
 import Pages.Email.LoginPage;
 import Pages.Email.SendMail;
 import Pages.ForecastPage;
 import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.TestException;
 import org.testng.annotations.Test;
 

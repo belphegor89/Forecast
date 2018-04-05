@@ -1,6 +1,5 @@
 package Pages;
 
-import Utils.Reporter;
 import com.google.common.base.Function;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
