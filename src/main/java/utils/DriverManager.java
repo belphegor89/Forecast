@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class DriverManager {
 
     static public FirefoxDriver getFirefox() {
 
-        System.setProperty("webdriver.gecko.driver",FIREFOX_PATH);
+        System.setProperty("webdriver.gecko.driver", FIREFOX_PATH);
 
         DesiredCapabilities capabilities = new DesiredCapabilities().firefox();
         FirefoxProfile profile = new FirefoxProfile();
@@ -36,7 +37,7 @@ public class DriverManager {
         return new FirefoxDriver(capabilities);
     }
 
-    static public ChromeDriver getChrome(){
+    static public ChromeDriver getChrome() {
 
         System.setProperty("webdriver.chrome.driver", CHROME_PATH);
         ChromeOptions options = new ChromeOptions();
@@ -64,14 +65,13 @@ public class DriverManager {
         if (instance.get() == null)
             if (getCurrentBrowserName().equals(BrowserType.FIREFOX)) {
                 instance.set(getFirefox());
-            }
-            else{
+            } else {
                 instance.set(getChrome());
             }
         return instance.get();
     }
 
-    public static void closeDriver(){
+    public static void closeDriver() {
         instance.get().quit();
         instance.set(null);
     }
@@ -80,8 +80,9 @@ public class DriverManager {
         if (BROWSER_TYPE == null)
             if (PropertiesReader.getConfigProperty("driver").equalsIgnoreCase("firefox")) {
                 BROWSER_TYPE = BrowserType.FIREFOX;
-            }else{
-                BROWSER_TYPE = BrowserType.CHROME;}
+            } else {
+                BROWSER_TYPE = BrowserType.CHROME;
+            }
         return BROWSER_TYPE;
     }
 }

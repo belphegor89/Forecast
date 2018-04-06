@@ -1,7 +1,7 @@
-package Pages.violity;
+package pages.violity;
 
-import Pages.BasePage;
-import Utils.PropertiesReader;
+import pages.BasePage;
+import utils.PropertiesReader;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 

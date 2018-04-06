@@ -1,6 +1,6 @@
-package Pages;
+package pages;
 
-import Utils.PropertiesReader;
+import utils.PropertiesReader;
 import org.openqa.selenium.By;
 
 /**

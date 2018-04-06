@@ -1,7 +1,7 @@
 
-import Pages.violity.ViolityLoginPage;
-import Utils.BaseTest;
-import Utils.Reporter;
+import pages.violity.ViolityLoginPage;
+import utils.BaseTest;
+import utils.Reporter;
 import com.aventstack.extentreports.ExtentTest;
 import org.testng.TestException;
 import org.testng.annotations.Test;

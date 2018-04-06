@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="ForecastSuite" parallel = "methods" thread-count="2">
     <listeners>
-        <listener class-name="Utils.Listeners.TestListener" />
+        <listener class-name="utils.listeners.TestListener" />
     </listeners>
     <test name="GetWeatherForecast" preserve-order="true">
     <classes>
         <class name="SearchAndSendWeatherForecast"/>
-        <class name="ViolityLogin"/>
     </classes>
     </test>
 </suite>

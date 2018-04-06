@@ -1,7 +1,7 @@
-package Pages.Email;
+package pages.Email;
 
-import Pages.BasePage;
-import Utils.PropertiesReader;
+import pages.BasePage;
+import utils.PropertiesReader;
 import org.openqa.selenium.By;
 
 /**

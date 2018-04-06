@@ -1,8 +1,8 @@
-import Utils.Reporter;
-import Pages.Email.LoginPage;
-import Pages.Email.SendMail;
-import Pages.ForecastPage;
-import Utils.*;
+import utils.Reporter;
+import pages.Email.LoginPage;
+import pages.Email.SendMail;
+import pages.ForecastPage;
+import utils.*;
 import com.aventstack.extentreports.ExtentTest;
 import org.testng.TestException;
 import org.testng.annotations.Test;

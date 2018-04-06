@@ -1,8 +1,8 @@
-package Pages.Email;
+package pages.Email;
 
-import Pages.BasePage;
-import Utils.PropertiesReader;
-import Utils.Tools;
+import pages.BasePage;
+import utils.PropertiesReader;
+import utils.Tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;

@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import com.google.common.base.Function;
 import org.apache.commons.io.FileUtils;

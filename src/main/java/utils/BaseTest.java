@@ -1,11 +1,10 @@
-package Utils;
+package utils;
 
-import Pages.BasePage;
+import pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
 /**
  * Created by yzosin on 20-Sep-17.
@@ -15,12 +14,12 @@ public class BaseTest {
     public static Logger logger = Logger.getLogger(BaseTest.class);
 
     @BeforeMethod
-    public void before(){
+    public void before() {
 
-        try{
+        try {
             logger.info("Creating driver for " + getClass().getName().toString() + " test");
             BasePage.driver.set(DriverManager.getDriver());
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Reporter.fail("Failed during driver creation", "");
             Reporter.saveAndQuit();
@@ -29,7 +28,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void endTest(){
+    public void endTest() {
 
         Reporter.saveAndQuit();
         BasePage.driver().quit();

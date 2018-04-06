@@ -1,12 +1,10 @@
-package Utils;
+package utils;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.PatternLayout;
 import org.testng.log4testng.Logger;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -18,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,16 +49,16 @@ public class Reporter {
             // generate report folder name
             Path rootPath = getNewReportPath();
             // create directory if not exists
-            if(Files.notExists(rootPath)){
+            if (Files.notExists(rootPath)) {
                 reportPath = Files.createDirectories(rootPath);
-            } else{
+            } else {
                 reportPath = rootPath;
             }
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         if (null == extent)
-        extent = new ExtentReports();
+            extent = new ExtentReports();
 
         htmlReporter = new ExtentHtmlReporter(Paths.get(reportPath.toString(), filePath).toAbsolutePath().toFile());
         htmlReporter.config().setChartVisibilityOnOpen(false);
@@ -81,7 +78,7 @@ public class Reporter {
         //return extent.createTest(testName);
     }
 
-    public static void saveAndQuit(){
+    public static void saveAndQuit() {
         extent.flush();
     }
 
