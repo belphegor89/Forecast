@@ -1,6 +1,5 @@
 package utils.listeners;
 
-import utils.Reporter;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -10,7 +9,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public synchronized void onTestStart(ITestResult iTestResult) {
-        System.out.println("THE TEST " + getTestMethodName(iTestResult) + " STARTED.");
+        System.out.println("THE EXECUTION OF " + getTestMethodName(iTestResult) + " STARTED!");
     }
 
     @Override
@@ -20,12 +19,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public synchronized void onTestFailure(ITestResult iTestResult) {
-        Reporter.fail("Log", iTestResult.getTestClass().getName().toString());
+        System.out.println("THE TEST " + getTestMethodName(iTestResult) + " FAILED!. Please see the logs and report for more details.");
     }
 
     @Override
     public synchronized void onTestSkipped(ITestResult iTestResult) {
-
+        System.out.println("THE TEST " + getTestMethodName(iTestResult) + " SKIPPED");
     }
 
     @Override
@@ -44,7 +43,7 @@ public class TestListener implements ITestListener {
     }
 
     private static String getTestMethodName(ITestResult iTestResult) {
-        return iTestResult.getTestClass().getName().toString();
+        return iTestResult.getTestClass().getName().toString().toUpperCase();
     }
 
 }

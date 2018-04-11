@@ -75,7 +75,7 @@ public class Reporter {
         ExtentTest testCase = extent.createTest(testName);
         testStorage.put(Thread.currentThread().getId(), testCase);
         return testCase;
-        //return extent.createTest(testName);
+
     }
 
     public static void saveAndQuit() {
@@ -90,6 +90,10 @@ public class Reporter {
         return Paths.get(root, "report", reportName);
     }
 
+
+    public static void log(String log) {
+        testStorage.get(Thread.currentThread().getId()).info(log);
+    }
 
     public static void fail(String log,
                             String testCaseName) {

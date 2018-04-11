@@ -2,6 +2,7 @@ package pages.Email;
 
 import pages.BasePage;
 import utils.PropertiesReader;
+import utils.Reporter;
 import utils.Tools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -15,7 +16,7 @@ import org.testng.Assert;
 public class SendMail extends BasePage {
 
     private static SendMail instance;
-    public static SendMail Instance =(instance!=null) ? instance: new SendMail();
+    public static SendMail Instance = (instance != null) ? instance : new SendMail();
 
     String writeTo = PropertiesReader.getConfigProperty("recipient");
 
@@ -28,7 +29,7 @@ public class SendMail extends BasePage {
     By text = By.id("tinymce");
     By message = By.xpath(".//div[@class='sendmsg__ads-ready']");
 
-    public void sendMailWithFile () {
+    public void sendMailWithFile() {
 
         logger.info("Clicking Write Mail link");
         findElement(writeMail).click();
@@ -50,19 +51,19 @@ public class SendMail extends BasePage {
         switchToDefaultContent();
         logger.info("Sending mail");
         findElement(sendButton).click();
-        try{
+        try {
             acceptAlertMessage();
-        } catch(NoAlertPresentException Ex){
+        } catch (NoAlertPresentException Ex) {
             logger.info("No alert message found");
-            validateMessageSent();
         }
         logger.info("Mail sent!");
     }
 
-    public void validateMessageSent(){
+    public boolean validateMessageSent() {
         String validationMessage = findElement(message).getText();
-        Assert.assertEquals(validationMessage,"Ваш лист надіслано\n" +
+        Assert.assertEquals(validationMessage, "Ваш лOст надіслано\n" +
                         "Написати щеПовернутись у вхідні",
                 "Success message doesn't match the expected one");
+        return true;
     }
 }

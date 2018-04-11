@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import utils.Reporter;
 import pages.Email.LoginPage;
 import pages.Email.SendMail;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Created by yzosin on 20-Sep-17.
  */
-public class SearchAndSendWeatherForecast extends BaseTest {
+public class SendWeatherForecast extends BaseTest {
 
     ExtentTest test = Reporter.addTest("SendWeatherForecast");
 
@@ -31,12 +32,12 @@ public class SearchAndSendWeatherForecast extends BaseTest {
             loginPage.login();
             test.info("User is logged in. Sending mail.");
             sendMail.sendMailWithFile();
-            test.info("User is logged in. Sending mail.");
+            Assert.assertTrue(sendMail.validateMessageSent());
             test.pass("Test finished, please see the report");
-        } catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
             Reporter.takeScreenshot(getClass().getName().toString());
-            test.fail("Test failed becasue of: " + e.getMessage());
+            test.fail("Test failed becasue of: " + e.getMessage().toString());
             throw new TestException("Test has failed.");
         }
     }

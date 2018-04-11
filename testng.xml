@@ -5,7 +5,7 @@
     </listeners>
     <test name="GetWeatherForecast" preserve-order="true">
     <classes>
-        <class name="SearchAndSendWeatherForecast"/>
+        <class name="SendWeatherForecast"/>
     </classes>
     </test>
 </suite>
