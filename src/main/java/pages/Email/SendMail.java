@@ -61,7 +61,7 @@ public class SendMail extends BasePage {
 
     public boolean validateMessageSent() {
         String validationMessage = findElement(message).getText();
-        Assert.assertEquals(validationMessage, "Ваш лOст надіслано\n" +
+        Assert.assertEquals(validationMessage, "Ваш лист надіслано\n" +
                         "Написати щеПовернутись у вхідні",
                 "Success message doesn't match the expected one");
         return true;

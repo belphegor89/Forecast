@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.testng.ITestResult;
 import org.testng.log4testng.Logger;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -12,11 +13,13 @@ import ru.yandex.qatools.ashot.Screenshot;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -28,25 +31,23 @@ public class Reporter {
     private static Logger logger = Logger.getLogger(Reporter.class);
     private static String root = System.getProperty("user.dir");
     private static String filePath = "extentreport.html";
-    private static String testCaseName;
-    private static final Reporter REPORTER = new Reporter();
     private static ExtentReports extent;
-    private static ExtentTest test;
-    private static ExtentTest childTest;
     private static ExtentHtmlReporter htmlReporter;
     private static Path reportPath;
     private static Path screenshotFolder;
     private static boolean buildStatus = true;
     private static ArrayList failuresBucket = new ArrayList<String>();
-    private static Path logFolder;
     private static ConcurrentHashMap<Long, ExtentTest> testStorage = new ConcurrentHashMap<>();
+
+    private static Reporter instance;
+    public static Reporter Instance = (instance != null) ? instance : new Reporter();
 
     private Reporter() {
 
         logger.info("Creating the Reporter");
 
         try {
-            // generate report folder name
+
             Path rootPath = getNewReportPath();
             // create directory if not exists
             if (Files.notExists(rootPath)) {
@@ -74,8 +75,13 @@ public class Reporter {
     public static synchronized ExtentTest addTest(String testName) {
         ExtentTest testCase = extent.createTest(testName);
         testStorage.put(Thread.currentThread().getId(), testCase);
-        return testCase;
+        return testStorage.get(Thread.currentThread().getId());
+    }
 
+    public static synchronized Map<Long, ExtentTest> startTest(String testName) {
+        ExtentTest testCase = extent.createTest(testName);
+        testStorage.put(Thread.currentThread().getId(), testCase);
+        return testStorage;
     }
 
     public static void saveAndQuit() {
@@ -90,20 +96,23 @@ public class Reporter {
         return Paths.get(root, "report", reportName);
     }
 
+    public static synchronized void pass(String log) {
+        testStorage.get(Thread.currentThread().getId()).pass(log);
+    }
 
-    public static void log(String log) {
+    public static synchronized void log(String log) {
         testStorage.get(Thread.currentThread().getId()).info(log);
     }
 
     public static void fail(String log,
                             String testCaseName) {
         try {
-            String screenshotPath = takeScreenshot(testCaseName).substring(takeScreenshot(testCaseName).indexOf("screenshots"));
-            childTest.fail(log, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            String screenshotPath = takeScreenshot(testStorage.get(Thread.currentThread().getId()).toString().substring(takeScreenshot(testCaseName).indexOf("screenshots")));
+            testStorage.get(Thread.currentThread().getId()).fail(log, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             buildStatus = false;
             failuresBucket.add(log);
         } catch (Exception e) {
-            test.fail(log);
+            testStorage.get(Thread.currentThread().getId()).fail(log);
         }
     }
 
@@ -129,4 +138,25 @@ public class Reporter {
 
         return null;
     }
+
+    public static void setSystemInfo(Map<String, String> info) {
+
+        for (Map.Entry<String, String> entry : info.entrySet()) {
+            extent.setSystemInfo(entry.getKey(), entry.getValue());
+        }
+        extent.flush();
+    }
+
+    public static synchronized void stopReporting(ITestResult result) {
+
+        if (result.getStatus() == ITestResult.FAILURE)
+            fail("Test failed because of: " + result.getThrowable().getMessage().toString(), String.valueOf(testStorage.get(Thread.currentThread().getName().toString())));
+        else if (result.getStatus() == ITestResult.SKIP)
+            log("Test: " + testStorage.get(Thread.currentThread().getId()).toString() + " skipped");
+        else
+            pass("Test passed!");
+
+        saveAndQuit();
+    }
+
 }
