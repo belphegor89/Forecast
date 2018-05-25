@@ -16,6 +16,7 @@ public class ForecastPage extends BasePage {
 
     public void searchCity() {
         open(PropertiesReader.getConfigProperty("URL"));
+        waitForPageToLoad();
         logger.info("Entering " + PropertiesReader.getConfigProperty("searchCity") + " into search field");
         findElement(searchField).sendKeys(PropertiesReader.getConfigProperty("searchCity"));
         logger.info("Clicking search icon");

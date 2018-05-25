@@ -28,6 +28,7 @@ public class LoginPage extends BasePage {
         validateLogin();
         logger.info("User is successfully logged in!");
         waitForPageToLoad();
+        isPageLoaded();
     }
 
     public void validateLogin(){
