@@ -42,7 +42,6 @@ public class BaseTest {
     @AfterMethod
     public void endTest(ITestResult testResult) {
         Reporter.stopReporting(testResult);
-        //Reporter.saveAndQuit();
         BasePage.driver().quit();
         DriverManager.closeDriver();
     }
