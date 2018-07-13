@@ -125,6 +125,18 @@
             <version>1.5.2</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
     </dependencies>
 
 </project>

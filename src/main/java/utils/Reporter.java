@@ -159,4 +159,27 @@ public class Reporter {
         saveAndQuit();
     }
 
+    public static synchronized void stopReportingAPI(ITestResult result) {
+
+        if (result.getStatus() == ITestResult.FAILURE)
+            failNoScreenshot("Test failed because of: " + result.getThrowable().getMessage().toString(), String.valueOf(testStorage.get(Thread.currentThread().getName().toString())));
+        else if (result.getStatus() == ITestResult.SKIP)
+            log("Test: " + testStorage.get(Thread.currentThread().getId()).toString() + " skipped");
+        else
+            pass("Test passed!");
+
+        saveAndQuit();
+    }
+
+    public static void failNoScreenshot(String log,
+                                        String testCaseName) {
+        try {
+            testStorage.get(Thread.currentThread().getId()).fail(log);
+            buildStatus = false;
+            failuresBucket.add(log);
+        } catch (Exception e) {
+            testStorage.get(Thread.currentThread().getId()).fail(log);
+        }
+    }
+
 }

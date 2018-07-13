@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
+import utils.Reporter;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +29,7 @@ public abstract class BasePage {
     private static String fileUploadPath = rootFolder + File.separator + TARGET_FOLDER + File.separator + "SinoptikScreenshot.png";
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
+    static Reporter reporter = Reporter.Instance;
 
     public BasePage() {
 
@@ -39,19 +41,19 @@ public abstract class BasePage {
 
     public boolean isPageLoaded() {
         boolean result = false;
-        logger.info("Page title is: " + driver().getTitle());
-        logger.info("Page URL is: " + driver().getCurrentUrl());
+        Reporter.log("Page title is: " + driver().getTitle());
+        Reporter.log("Page URL is: " + driver().getCurrentUrl());
         if (driver().getTitle().contains(pageTitle))
             result = true;
         else {
-            logger.info("Expected title: " + pageTitle);
+            Reporter.log("Expected title: " + pageTitle);
             result = false;
         }
 
         if (driver().getCurrentUrl().contains(pageURL))
             result = true;
         else {
-            logger.info("Expected URL: " + pageURL);
+            Reporter.log("Expected URL: " + pageURL);
             result = false;
         }
         return result;
@@ -67,12 +69,12 @@ public abstract class BasePage {
     }
 
     public String getTitle() {
-        logger.info("The page title is: " + "\"" + pageTitle + "\"");
+        Reporter.log("The page title is: " + "\"" + pageTitle + "\"");
         return pageTitle;
     }
 
     public String getURL(String url) {
-        logger.info("The requested URL is: " + url + pageURL);
+        Reporter.log("The requested URL is: " + url + pageURL);
         return url + pageURL;
     }
 

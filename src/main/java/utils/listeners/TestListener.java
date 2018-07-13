@@ -4,9 +4,11 @@ package utils.listeners;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 
 public class TestListener implements ITestListener {
 
+     utils.Reporter reporter = utils.Reporter.Instance;
     @Override
     public synchronized void onTestStart(ITestResult iTestResult) {
         System.out.println("THE EXECUTION OF " + getTestMethodName(iTestResult) + " STARTED!");
