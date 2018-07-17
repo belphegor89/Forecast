@@ -1,6 +1,5 @@
 package utils;
 
-import com.aventstack.extentreports.ExtentTest;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterSuite;
 import pages.BasePage;
@@ -8,8 +7,6 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by yzosin on 20-Sep-17.

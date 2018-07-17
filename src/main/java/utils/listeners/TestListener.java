@@ -16,7 +16,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public synchronized void onTestSuccess(ITestResult iTestResult) {
-        System.out.println("THE TEST " + getTestMethodName(iTestResult) + " PASSED!");
+        System.out.println("THE TEST " + getTestMethodName(iTestResult) + " PASSED!"+ "\n" );
     }
 
     @Override

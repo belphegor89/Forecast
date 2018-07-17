@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import static io.restassured.RestAssured.when;
 
-public class WeatherMap {
+public class WeatherMap extends apiTests.BaseTestAPI {
 
     String baseURI = "http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22";
 
@@ -20,7 +20,6 @@ public class WeatherMap {
         HashMap<String,Integer> coords = jsonPath.get("coord");
         coords.get("lon");
         coords.get("lat");
-        System.out.println(coords.toString());
-
+        System.out.println("Coordinates: " + "\n" + coords.toString());
     }
 }

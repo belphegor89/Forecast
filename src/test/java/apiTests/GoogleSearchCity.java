@@ -5,10 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Reporter;
 import utils.apiRequests.RequestGET;
+
 import java.util.HashMap;
 
-
-public class GoogleSearch extends apiTests.BaseTestAPI {
+public class GoogleSearchCity extends apiTests.BaseTestAPI {
 
     Response response;
 
@@ -23,6 +23,7 @@ public class GoogleSearch extends apiTests.BaseTestAPI {
         parametersForRequest.put("radius", "1000");
         response = RequestGET.searchNearbyCity(requestSpecification, parametersForRequest);
         Reporter.log("Request sent. Validating response from server");
-        Assert.assertEquals(response.statusCode(), "200");
+        Assert.assertEquals(response.statusCode(), 200, "The status code of: " + response.statusCode() + " doesn't math the expected!");
+        Reporter.log("Response status code is: " + response.statusCode());
     }
 }
