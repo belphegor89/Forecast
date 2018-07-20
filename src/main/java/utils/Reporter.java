@@ -13,7 +13,6 @@ import ru.yandex.qatools.ashot.Screenshot;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -78,10 +77,9 @@ public class Reporter {
         return testStorage.get(Thread.currentThread().getId());
     }
 
-    public static synchronized Map<Long, ExtentTest> startTest(String testName) {
+    public static synchronized void startTest(String testName) {
         ExtentTest testCase = extent.createTest(testName);
         testStorage.put(Thread.currentThread().getId(), testCase);
-        return testStorage;
     }
 
     public static void saveAndQuit() {

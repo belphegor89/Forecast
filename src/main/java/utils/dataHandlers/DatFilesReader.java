@@ -18,7 +18,7 @@ public class DatFilesReader {
      * @param randomValue    what kind of randomly generated value should be
      */
 
-    public static String getRandomValue(String randomValue) throws IOException {
+    public static String getRandomValue(String randomValue) {
         String line;
         List<String> lines = new ArrayList<>();
         try {

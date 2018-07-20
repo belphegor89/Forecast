@@ -5,8 +5,7 @@
     </listeners>
     <test name="TryingRequests" preserve-order="true">
         <classes>
-            <class name="apiTests.GoogleSearchCity"/>
-            <class name="apiTests.WeatherMap"/>
+            <class name="apiTests.SearchCityAndPhoto"/>
         </classes>
     </test>
 </suite>
