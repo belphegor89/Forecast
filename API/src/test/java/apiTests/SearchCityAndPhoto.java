@@ -14,6 +14,7 @@ public class SearchCityAndPhoto extends apiTests.BaseTestAPI {
 
     Response response;
     String key = "AIzaSyASHu2Ic4ZJOmw6XoJbqDi9JVusokzBBSA";
+    ArrayList<String> names = new ArrayList<>();
 
     @Test
     public void findNearbyCity() {
@@ -27,6 +28,13 @@ public class SearchCityAndPhoto extends apiTests.BaseTestAPI {
         Reporter.log("Request sent. Validating response from server");
         Assert.assertEquals(response.statusCode(), 200, "The status code of: " + response.statusCode() + " doesn't math the expected!");
         Reporter.log("Response status code is: " + response.statusCode());
+
+        JsonPath jsonPath = response.jsonPath();
+        int results = jsonPath.get("results.size()");
+        for (int i = 0; i < results; i++) {
+            names.add(jsonPath.get("results[" + i + "].name").toString());
+        }
+        System.out.println(names);
     }
 
     @Test
@@ -44,7 +52,7 @@ public class SearchCityAndPhoto extends apiTests.BaseTestAPI {
         //String body = response.getBody().asString();
         JsonPath jsonPath = response.jsonPath();
         String resultReference = jsonPath.getString("candidates.photos.photo_reference").
-                replaceAll("\\[", "").replaceAll("\\]","");
+                replaceAll("\\[", "").replaceAll("\\]", "");
 
         HashMap<String, String> parametersForPhoto = new HashMap<>();
         parametersForPhoto.put("key", key);
