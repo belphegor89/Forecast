@@ -30,7 +30,7 @@ public class BaseTest {
             BasePage.driver.set(DriverManager.getDriver());
         } catch (Exception e) {
             e.printStackTrace();
-            Reporter.fail("Failed during driver creation", getClass().getName().toString());
+            Reporter.fail("Failed during driver creation");
             Reporter.saveAndQuit();
             Assert.fail();
         }

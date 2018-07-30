@@ -102,10 +102,11 @@ public class Reporter {
         testStorage.get(Thread.currentThread().getId()).info(log);
     }
 
-    public static void fail(String log,
-                            String testCaseName) {
+    public static void fail(String log) {
+
         try {
-            String screenshotPath = takeScreenshot(testStorage.get(Thread.currentThread().getId()).toString().substring(takeScreenshot(testCaseName).indexOf("screenshots")));
+            String screenshotPath = takeScreenshot();
+            screenshotPath = screenshotPath.substring(screenshotPath.indexOf("screenshots"));
             testStorage.get(Thread.currentThread().getId()).fail(log, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             buildStatus = false;
             failuresBucket.add(log);
@@ -114,8 +115,9 @@ public class Reporter {
         }
     }
 
-    public static synchronized String takeScreenshot(String testCaseName) {
+    public static synchronized String takeScreenshot() {
 
+        String testCaseName = testStorage.get(Thread.currentThread().getId()).getModel().getName();
         try {
             screenshotFolder = Paths.get(reportPath.toString(), "screenshots");
 
@@ -148,7 +150,7 @@ public class Reporter {
     public static synchronized void stopReporting(ITestResult result) {
 
         if (result.getStatus() == ITestResult.FAILURE)
-            fail("Test failed because of: " + result.getThrowable().getMessage().toString(), String.valueOf(testStorage.get(Thread.currentThread().getName().toString())));
+            fail("Test failed because of: " + result.getThrowable().getMessage().toString());
         else if (result.getStatus() == ITestResult.SKIP)
             log("Test: " + testStorage.get(Thread.currentThread().getId()).toString() + " skipped");
         else
@@ -160,7 +162,7 @@ public class Reporter {
     public static synchronized void stopReportingAPI(ITestResult result) {
 
         if (result.getStatus() == ITestResult.FAILURE)
-            failNoScreenshot("Test failed because of: " + result.getThrowable().getMessage().toString(), String.valueOf(testStorage.get(Thread.currentThread().getName().toString())));
+            failNoScreenshot("Test failed because of: " + result.getThrowable().getMessage().toString());
         else if (result.getStatus() == ITestResult.SKIP)
             log("Test: " + testStorage.get(Thread.currentThread().getId()).toString() + " skipped");
         else
@@ -169,8 +171,7 @@ public class Reporter {
         saveAndQuit();
     }
 
-    public static void failNoScreenshot(String log,
-                                        String testCaseName) {
+    public static void failNoScreenshot(String log) {
         try {
             testStorage.get(Thread.currentThread().getId()).fail(log);
             buildStatus = false;
