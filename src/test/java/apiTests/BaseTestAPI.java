@@ -30,6 +30,5 @@ public class BaseTestAPI {
     @AfterMethod
     public void flushReporter(ITestResult testResult) {
         Reporter.stopReportingAPI(testResult);
-
     }
 }
