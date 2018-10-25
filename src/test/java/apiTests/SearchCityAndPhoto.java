@@ -34,7 +34,7 @@ public class SearchCityAndPhoto extends apiTests.BaseTestAPI {
         for (int i = 0; i < results; i++) {
             names.add(jsonPath.get("results[" + i + "].name").toString());
         }
-        System.out.println(names);
+        System.out.println(names.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
     }
 
     @Test
