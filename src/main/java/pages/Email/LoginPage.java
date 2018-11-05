@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
     private static LoginPage instance;
     public static LoginPage Instance =(instance!=null) ? instance: new LoginPage();
 
-    By username = By.xpath(".//input[@name='Login']");
+    By username = By.xpath(".//input[@name='regular']");
     By password = By.xpath(".//input[@type='password']");
     By loginbtn = By.xpath(".//button[@type='submit']");
     By writeMail = By.xpath(".//*[@id='content']//button");
